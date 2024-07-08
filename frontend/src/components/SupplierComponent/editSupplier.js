@@ -70,7 +70,7 @@ function EditSupplier() {
             <div className="edit-supplier-form">
                 
                     <div>
-                        <h2>ADD NEW SUPPLIER / MANUFACTURER</h2>
+                        <h2>SUPPLIER DETAILS</h2>
                     </div>
                     <br></br>
 
@@ -112,3 +112,5 @@ function EditSupplier() {
     )
 
 }
+
+export default EditSupplier;

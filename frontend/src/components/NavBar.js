@@ -10,6 +10,7 @@ function NavBar(){
                 <a href='#'>Medicines</a>
                 <a href='#'>Suppliers</a>
                 <a href='#'>Invoices</a>
+                <a href='#'>Download Reports</a>
 
                 <button className='logout-btn'>Logout</button>
             </div>

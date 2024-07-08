@@ -5,7 +5,7 @@ import axios from 'axios';
 function CreateInvoice() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [invoice, setInvoice] = useState({ customerName: '', customerEmail: '', medicines: [], totalAmount: 0 });
+    const [invoice, setInvoice] = useState({ customerName: '', customerEmail: '', medicines: [], total: 0 });
     const [medicines, setMedicines] = useState([]);
     const [selectedMedicine, setSelectedMedicine] = useState('');
     const [quantity, setQuantity] = useState(0);
@@ -19,7 +19,7 @@ function CreateInvoice() {
         };
 
         const fetchMedicines = async () => {
-            const result = await axios.get('http://localhost:8060/medicines');
+            const result = await axios.get('http://localhost:8060/medicinelist');
             setMedicines(result.data);
         };
 
@@ -42,7 +42,7 @@ function CreateInvoice() {
         setInvoice({
             ...invoice,
             medicines: [...invoice.medicines, newMedicine],
-            totalAmount: invoice.totalAmount + (selectedMed.price * quantity)
+            total: invoice.total + (selectedMed.price * quantity)
         });
     };
 
@@ -111,8 +111,8 @@ function CreateInvoice() {
                     <li key={index}>{med.medicineId.name} - {med.quantity} x {med.price}</li>
                 ))}
             </ul>
-            <p>Total Amount: {invoice.totalAmount}</p>
-            <button type="submit">{id ? 'Update' : 'Create'} Invoice</button>
+            <p>Total Amount: {invoice.total}</p>
+            <button type="submit">Create Invoice</button>
         </form>
     );
 }

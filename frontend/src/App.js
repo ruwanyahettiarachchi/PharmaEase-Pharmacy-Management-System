@@ -6,6 +6,7 @@ import MedicineList from './components/MedicineComponent/medicineList';
 import AddSupplier from './components/SupplierComponent/addSupplier';
 import SupplierList from './components/SupplierComponent/supplierList';
 import CreateInvoice from './components/InvoiceComponent/createInvoice';
+import InvoiceList from './components/InvoiceComponent/invoiceList';
 
 import NavBar from './components/NavBar';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/addsupplier" element={<AddSupplier/>}></Route>
         <Route path="/supplierlist" element={<SupplierList/>}></Route>
         <Route path="/createinvoice" element={<CreateInvoice/>}></Route>
+        <Route path="/invoicelist" element={<InvoiceList/>}></Route>
 
         </Routes>
 

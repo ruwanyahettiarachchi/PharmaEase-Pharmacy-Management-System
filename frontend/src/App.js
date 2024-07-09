@@ -9,7 +9,7 @@ import CreateInvoice from './components/InvoiceComponent/createInvoice';
 import InvoiceList from './components/InvoiceComponent/invoiceList';
 import PharmacyDashBoard from './components/DashBoardComponent/dashboard';
 
-import NavBar from './components/NavBar';
+import NavBar from './components/NavigationComponent/NavBar';
 import EditMedicine from './components/MedicineComponent/editMedicine';
 
 function App() {

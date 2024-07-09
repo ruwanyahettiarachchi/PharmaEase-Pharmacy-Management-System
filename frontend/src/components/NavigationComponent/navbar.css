@@ -1,0 +1,77 @@
+/* navBar.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+.topic {
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 1.5em;
+}
+
+.navbar a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+.menu-item {
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.submenu a {
+    padding-left: 20px;
+    background-color: #444;
+}
+
+.menu-item > a:hover + .submenu,
+.menu-item .submenu:hover {
+    max-height: 200px; /* adjust based on the number of submenu items */
+}
+
+.logout-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.logout-btn:hover {
+    background-color: #ff6666;
+}

@@ -54,10 +54,7 @@ function InvoiceList(){
                                 <td> {e1.customerName}</td> 
                                 <td> {e1.total}</td> 
                                 <td>
-                                    <a href='#' className='btn1'>View Invoice</a>
-                                
-                                    <a href='#' className='btn1'>Edit</a>
-                                
+                                    <a href={`/update_invoice/${e1._id}`} className='btn1'>View Invoice</a>
                                     <button onClick={()=>handledelete(e1._id)}>Delete</button>
                                 </td>
                             </tr>

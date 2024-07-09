@@ -10,9 +10,11 @@ router.post("/create_supplier",async(req,res)=>{
 })
 
 router.get("/supplier",async(req,res)=>{
-    const data=await supplierModel.find({})
-    res.json({success:true,message:"",data:data})
+    const data= await supplierModel.find({})
+  
+    res.json({success:true,data:data})
 })
+
 
 router.put("/update_supplier",async(req,res)=>{
     const {id,...rest}=req.body

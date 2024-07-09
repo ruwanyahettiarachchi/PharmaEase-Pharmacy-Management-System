@@ -1,82 +1,92 @@
-import {useState,useEffect, useRef } from 'react'
-import axios  from 'axios'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function MedicineList(){
+function MedicineList() {
+  const [suppliers, setSuppliers] = useState([]);
+  const [medicineList, setMedicineList] = useState([]);
 
-    const [medicinelist,setmedicinelist]=useState([]);
-
-//read
-    const getfetchdetails=async()=>{
-    try{
-        const data=await axios.get("http://localhost:8060/medicine")
-        console.log(data.data.success)
-        if(data.data.success){
-            setmedicinelist(data.data.data)
-        }
-    }catch(err){
-        console.log(err)
+  // Fetch suppliers
+  const getFetchSuppliers = async () => {
+    try {
+      const data = await axios.get('http://localhost:8060/supplier');
+      if (data.data.success) {
+        setSuppliers(data.data.data);
+      }
+    } catch (err) {
+      alert(err);
     }
+  };
+
+  useEffect(() => {
+    getFetchSuppliers();
+  }, []);
+
+  // Fetch medicines
+  const getFetchDetails = async () => {
+    try {
+      const data = await axios.get('http://localhost:8060/medicine');
+      if (data.data.success) {
+        setMedicineList(data.data.data);
+      }
+    } catch (err) {
+      console.log(err);
     }
-    useEffect(()=>{
-    getfetchdetails()
-    },[])
+  };
 
+  useEffect(() => {
+    getFetchDetails();
+  }, []);
 
-//delete
-    const handledelete=async(id)=>{
-    const data=await axios.delete("http://localhost:8060/delete_medicine/"+id)
-    if(data.data.success){
-        getfetchdetails()
-        console.log(data.data.message)
-        alert("Medicine record deleted successfully")
+  // Delete medicine
+  const handleDelete = async (id) => {
+    try {
+      const data = await axios.delete('http://localhost:8060/delete_medicine/' + id);
+      if (data.data.success) {
+        getFetchDetails();
+        console.log(data.data.message);
+        alert('Medicine record deleted successfully');
+      }
+    } catch (err) {
+      console.log(err);
     }
-    }
+  };
 
-
-    return(
-        <div> 
-
-            <table>
-                
-                        
-                <tr>
-                <th>Medicine Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Supplier</th>
-                <th>Action</th>
-                </tr>
-
-
-                <tbody>
-                    { 
-                    medicinelist.map((e1)=>{
-                        return(
-                            <tr> 
-                                <td> {e1.name}</td> 
-                                <td> {e1.description}</td> 
-                                <td> {e1.price}</td> 
-                                <td> {e1.stock}</td>
-                                <td> {e1.supplier}</td>
-                                
-                                <td>
-                                    <a href='#' className='btn1'>View Medicine</a>
-                                
-                                    <a href='#' className='btn1'>Edit</a>
-                                
-                                    <button onClick={()=>handledelete(e1._id)}>Delete</button>
-                                </td>
-                            </tr>
-                        )
-
-                        })
-                    }
-                </tbody>
-            </table>
-
-        </div>
-    )
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Medicine Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Supplier</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {medicineList.map((medicine) => {
+            const supplier = suppliers.find((sup) => sup._id === medicine.supplier);
+            return (
+              <tr key={medicine._id}>
+                <td>{medicine.m_name}</td>
+                <td>{medicine.description}</td>
+                <td>{medicine.price}</td>
+                <td>{medicine.stock}</td>
+                <td>{supplier ? supplier.name : 'Unknown'}</td>
+                <td>
+                  <a href={`/update_medicine/${medicine._id}`} className="btn1">
+                    View Medicine
+                  </a>
+                  <button onClick={() => handleDelete(medicine._id)}>Delete</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-export default MedicineList
+export default MedicineList;

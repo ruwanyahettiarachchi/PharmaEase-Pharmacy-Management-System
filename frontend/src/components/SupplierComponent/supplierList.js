@@ -57,10 +57,7 @@ function SupplierList(){
                                 <td> {e1.contractInfo}</td> 
                                 
                                 <td>
-                                    <a href='#' className='btn1'>View details</a>
-                                
-                                    <a href='#' className='btn1'>Edit</a>
-                                
+                                    <a href={`/update_supplier/${e1._id}`} className='btn1'>View details</a>
                                     <button onClick={()=>handledelete(e1._id)}>Delete</button>
                                 </td>
                             </tr>

@@ -39,7 +39,7 @@ router.get("/medicine/:id", async (req, res) => {
             return res.status(404).send({ success: false, message: "medicine not found" });
         }
 
-        res.send({ success: true, message: "medicine fetched successfully", data: user });
+        res.send({ success: true, message: "medicine fetched successfully", data: medicine });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, message: "Internal Server Error" });

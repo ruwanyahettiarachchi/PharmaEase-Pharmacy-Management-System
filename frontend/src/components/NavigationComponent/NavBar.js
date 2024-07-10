@@ -12,7 +12,7 @@ function NavBar() {
     return (
         <div>
             <div className='navbar'>
-                <h3 className='topic'>Pharma Eace</h3>
+                <h3 className='topic'>Pharma Ease</h3>
 
                 <a href='/' onClick={() => setExpandedSection(null)}>Dash Board</a>
 

@@ -1,75 +1,75 @@
-import {useState,useEffect, useRef } from 'react'
-import axios  from 'axios'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import './supplierList.css'; // Import the CSS file
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons
 
-function SupplierList(){
+function SupplierList() {
+  const [supplierList, setSupplierList] = useState([]);
 
-    const [supplierlist,setsupplierlist]=useState([]);
-
-//read
-    const getfetchdetails=async()=>{
-    try{
-        const data=await axios.get("http://localhost:8060/supplier")
-        console.log(data.data.success)
-        if(data.data.success){
-            setsupplierlist(data.data.data)
-        }
-    }catch(err){
-        console.log(err)
+  // Fetch suppliers
+  const getFetchDetails = async () => {
+    try {
+      const data = await axios.get('http://localhost:8060/supplier');
+      if (data.data.success) {
+        setSupplierList(data.data.data);
+      }
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  useEffect(() => {
+    getFetchDetails();
+  }, []);
+
+  // Delete supplier
+  const handleDelete = async (id) => {
+    try {
+      const data = await axios.delete('http://localhost:8060/delete_supplier/' + id);
+      if (data.data.success) {
+        getFetchDetails();
+        console.log(data.data.message);
+        alert('Supplier record deleted successfully');
+      }
+    } catch (err) {
+      console.log(err);
     }
-    useEffect(()=>{
-    getfetchdetails()
-    },[])
+  };
 
-
-//delete
-    const handledelete=async(id)=>{
-    const data=await axios.delete("http://localhost:8060/delete_supplier/"+id)
-    if(data.data.success){
-        getfetchdetails()
-        console.log(data.data.message)
-        alert("Supplier record deleted successfully")
-    }
-    }
-
-
-    return(
-        <div> 
-
-            <table>
-                
-                        
-                <tr>
-                <th>Supplier Name</th>
-                <th>Email</th>
-                <th>Contract Information</th>
-                <th>Action</th>
-                </tr>
-
-
-                <tbody>
-                    { 
-                    supplierlist.map((e1)=>{
-                        return(
-                            <tr> 
-                                <td> {e1.name}</td> 
-                                <td> {e1.email}</td> 
-                                <td> {e1.contractInfo}</td> 
-                                
-                                <td>
-                                    <a href={`/update_supplier/${e1._id}`} className='btn1'>View details</a>
-                                    <button onClick={()=>handledelete(e1._id)}>Delete</button>
-                                </td>
-                            </tr>
-                        )
-
-                        })
-                    }
-                </tbody>
-            </table>
-
-        </div>
-    )
+  return (
+    <div className="supplier-list-page">
+      <div className="supplier-list-container">
+        <h2>Supplier List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Supplier Name</th>
+              <th>Email</th>
+              <th>Contract Information</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {supplierList.map((supplier) => (
+              <tr key={supplier._id}>
+                <td>{supplier.name}</td>
+                <td>{supplier.email}</td>
+                <td>{supplier.contractInfo}</td>
+                <td>
+                  <a href={`/update_supplier/${supplier._id}`} className="action-btn">
+                    <FaEdit className="icon edit-icon" />
+                  </a>
+                  <button onClick={() => handleDelete(supplier._id)} className="action-btn">
+                    <FaTrashAlt className="icon delete-icon" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
-export default SupplierList
+export default SupplierList;

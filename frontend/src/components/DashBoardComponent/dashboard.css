@@ -1,0 +1,69 @@
+/* dashboard.css */
+.dashboard-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: url('../../images/pharmacy1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.dashboard-container {
+    margin-left: 220px; /* account for the sidebar */
+    padding: 20px;
+    padding-top: 100px; /* Adjust this value to move content lower */
+}
+
+.summary-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.summary-box {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    margin: 0 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-box h2 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.summary-box p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.summary-icon {
+    font-size: 2em;
+    color: #4caf50;
+}
+
+.list-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.list-section {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list-section h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.list-section p {
+    color: #666;
+}

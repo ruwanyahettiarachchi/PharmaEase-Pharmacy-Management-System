@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './addMedicine.css';
+import pharmacyImage from '../../images/medicine1.jpg'; // Correctly import the image
 
 const AddMedicine = () => {
   const [medicine, setMedicine] = useState({
@@ -48,73 +50,78 @@ const AddMedicine = () => {
   };
 
   return (
-    <div>
-      <div className="medicine-form">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <h2>ADD NEW MEDICINE</h2>
-          </div>
-          <br />
+    <div className='add-medicine-page'>
+      <div className="add-medicine-container">
+        <div className="medicine-form">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <h2>ADD NEW MEDICINE</h2>
+            </div>
+            <br />
 
-          <label>Medicine Name:</label>
-          <input
-            type="text"
-            id="m_name"
-            name="m_name"
-            placeholder="Enter medicine / drug name"
-            onChange={handleOnChange}
-            required
-          />
+            <label>Medicine Name:</label>
+            <input
+              type="text"
+              id="m_name"
+              name="m_name"
+              placeholder="Enter medicine / drug name"
+              onChange={handleOnChange}
+              required
+            />
 
-          <label>Description:</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            placeholder="Enter description"
-            onChange={handleOnChange}
-          />
+            <label>Description:</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Enter description"
+              onChange={handleOnChange}
+            />
 
-          <label>Medicine Price:</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            placeholder="Enter unit price"
-            onChange={handleOnChange}
-            required
-          />
+            <label>Medicine Price:</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              placeholder="Enter unit price"
+              onChange={handleOnChange}
+              required
+            />
 
-          <label>Stock:</label>
-          <input
-            type="number"
-            id="stock"
-            name="stock"
-            placeholder="Enter stock amount"
-            onChange={handleOnChange}
-            required
-          />
+            <label>Stock:</label>
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              placeholder="Enter stock amount"
+              onChange={handleOnChange}
+              required
+            />
 
-          <label>Supplier:</label>
-          <select
-          id="supplier"
-            name="supplier"
-            value={medicine.supplier}
-            onChange={handleOnChange}
-            required
-          >
-            <option value="">Select a supplier</option>
-            {suppliers.map((supplier) => (
-              <option key={supplier._id} value={supplier._id}>
-                {supplier.name}
-              </option>
-            ))}
-          </select>
+            <label>Supplier:</label>
+            <select
+              id="supplier"
+              name="supplier"
+              value={medicine.supplier}
+              onChange={handleOnChange}
+              required
+            >
+              <option value="">Select a supplier</option>
+              {suppliers.map((supplier) => (
+                <option key={supplier._id} value={supplier._id}>
+                  {supplier.name}
+                </option>
+              ))}
+            </select>
 
-          <button type="submit" className="submit-btn">
-            Add
-          </button>
-        </form>
+            <button type="submit" className="submit-btn">
+              Add Medicine
+            </button>
+          </form>
+        </div>
+        <div className="image-container">
+          <img src={pharmacyImage} alt="Medicine" />
+        </div>
       </div>
     </div>
   );

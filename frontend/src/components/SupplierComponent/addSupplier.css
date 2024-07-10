@@ -1,0 +1,72 @@
+/* addSupplier.css */
+.add-supplier-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../images/pharmacy1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.add-supplier-container {
+    width: calc(100% - 240px); /* Account for the sidebar */
+    margin-left: 220px;
+    display: flex;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.supplier-form {
+    width: 60%;
+}
+
+.supplier-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.supplier-form label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.supplier-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.image-container {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}

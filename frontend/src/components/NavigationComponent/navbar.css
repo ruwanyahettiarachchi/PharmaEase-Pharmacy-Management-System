@@ -10,7 +10,7 @@ body {
     left: 0;
     width: 200px;
     height: 100%;
-    background-color: #333;
+    background-color: #45915e;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,7 +36,7 @@ body {
 }
 
 .navbar a:hover {
-    background-color: #575757;
+    background-color: #c1b654;
 }
 
 .menu-item {
@@ -54,7 +54,7 @@ body {
 
 .submenu a {
     padding-left: 20px;
-    background-color: #444;
+    background-color: #1a5b27;
 }
 
 .menu-item > a:hover + .submenu,
@@ -63,7 +63,7 @@ body {
 }
 
 .logout-btn {
-    background-color: #ff4d4d;
+    background-color: #1b722d;
     color: white;
     border: none;
     padding: 10px;

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './medicineList.css'; // Import the CSS file
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons
 
 function MedicineList() {
   const [suppliers, setSuppliers] = useState([]);
@@ -52,39 +54,43 @@ function MedicineList() {
   };
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Medicine Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Supplier</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {medicineList.map((medicine) => {
-            const supplier = suppliers.find((sup) => sup._id === medicine.supplier);
-            return (
-              <tr key={medicine._id}>
-                <td>{medicine.m_name}</td>
-                <td>{medicine.description}</td>
-                <td>{medicine.price}</td>
-                <td>{medicine.stock}</td>
-                <td>{supplier ? supplier.name : 'Unknown'}</td>
-                <td>
-                  <a href={`/update_medicine/${medicine._id}`} className="btn1">
-                    View Medicine
-                  </a>
-                  <button onClick={() => handleDelete(medicine._id)}>Delete</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="medicine-list-page">
+      <div className="medicine-list-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Medicine Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Supplier</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {medicineList.map((medicine) => {
+              const supplier = suppliers.find((sup) => sup._id === medicine.supplier);
+              return (
+                <tr key={medicine._id}>
+                  <td>{medicine.m_name}</td>
+                  <td>{medicine.description}</td>
+                  <td>{medicine.price}</td>
+                  <td>{medicine.stock}</td>
+                  <td>{supplier ? supplier.name : 'Unknown'}</td>
+                  <td>
+                    <a href={`/update_medicine/${medicine._id}`} className="action-btn">
+                      <FaEdit className="icon edit-icon" />
+                    </a>
+                    <button onClick={() => handleDelete(medicine._id)} className="action-btn">
+                      <FaTrashAlt className="icon delete-icon" />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

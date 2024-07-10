@@ -1,72 +1,71 @@
-import {useState,useEffect, useRef } from 'react'
-import axios  from 'axios'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import './invoiceList.css'; // Import the CSS file
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons
 
-function InvoiceList(){
+function InvoiceList() {
+  const [invoiceList, setInvoiceList] = useState([]);
 
-    const [invoicelist,setinvoicelist]=useState([]);
-
-//read
-    const getfetchdetails=async()=>{
-    try{
-        const data=await axios.get("http://localhost:8060/invoice")
-        console.log(data.data.success)
-        if(data.data.success){
-            setinvoicelist(data.data.data)
-        }
-    }catch(err){
-        console.log(err)
+  // Fetch invoices
+  const getFetchDetails = async () => {
+    try {
+      const data = await axios.get('http://localhost:8060/invoice');
+      if (data.data.success) {
+        setInvoiceList(data.data.data);
+      }
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  useEffect(() => {
+    getFetchDetails();
+  }, []);
+
+  // Delete invoice
+  const handleDelete = async (id) => {
+    try {
+      const data = await axios.delete('http://localhost:8060/delete_invoice/' + id);
+      if (data.data.success) {
+        getFetchDetails();
+        alert('Invoice record deleted successfully');
+      }
+    } catch (err) {
+      console.log(err);
     }
-    useEffect(()=>{
-    getfetchdetails()
-    },[])
+  };
 
-
-//delete
-    const handledelete=async(id)=>{
-    const data=await axios.delete("http://localhost:8060/delete_invoice/"+id)
-    if(data.data.success){
-        getfetchdetails()
-        console.log(data.data.message)
-        alert("Invoice record deleted successfully")
-    }
-    }
-
-
-    return(
-        <div> 
-
-            <table>
-                
-                        
-                <tr>
-                <th>Customer Name</th>
-                <th>Total Amount</th>
-                <th>Action</th>
-                </tr>
-
-
-                <tbody>
-                    { 
-                    invoicelist.map((e1)=>{
-                        return(
-                            <tr> 
-                                <td> {e1.customerName}</td> 
-                                <td> {e1.total}</td> 
-                                <td>
-                                    <a href={`/update_invoice/${e1._id}`} className='btn1'>View Invoice</a>
-                                    <button onClick={()=>handledelete(e1._id)}>Delete</button>
-                                </td>
-                            </tr>
-                        )
-
-                        })
-                    }
-                </tbody>
-            </table>
-
-        </div>
-    )
+  return (
+    <div className="invoice-list-page">
+      <div className="invoice-list-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Customer Name</th>
+              <th>Total Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {invoiceList.map((invoice) => (
+              <tr key={invoice._id}>
+                <td>{invoice.customerName}</td>
+                <td>{invoice.total}</td>
+                <td>
+                  <a href={`/update_invoice/${invoice._id}`} className="action-btn">
+                    <FaEdit className="icon edit-icon" />
+                  </a>
+                  <button onClick={() => handleDelete(invoice._id)} className="action-btn">
+                    <FaTrashAlt className="icon delete-icon" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
-export default InvoiceList
+export default InvoiceList;

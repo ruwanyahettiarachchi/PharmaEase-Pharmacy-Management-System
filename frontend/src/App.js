@@ -11,6 +11,7 @@ import PharmacyDashBoard from './components/DashBoardComponent/dashboard';
 
 import NavBar from './components/NavigationComponent/NavBar';
 import EditMedicine from './components/MedicineComponent/editMedicine';
+import EditSupplier from './components/SupplierComponent/editSupplier';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
         <Route path="/createinvoice" element={<CreateInvoice/>}></Route>
         <Route path="/invoicelist" element={<InvoiceList/>}></Route>
         <Route path="/update_medicine/:id" element={<EditMedicine/>}></Route>
+        <Route path="/update_supplier/:id" element={<EditSupplier/>}></Route>
+
 
         </Routes>
 

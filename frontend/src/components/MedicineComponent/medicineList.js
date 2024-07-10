@@ -56,6 +56,7 @@ function MedicineList() {
   return (
     <div className="medicine-list-page">
       <div className="medicine-list-container">
+      <h2>Available Medicines</h2>
         <table>
           <thead>
             <tr>

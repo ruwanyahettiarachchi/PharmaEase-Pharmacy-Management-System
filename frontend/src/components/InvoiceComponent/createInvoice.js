@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './createInvoice.css'; // Import the new CSS file
+import pharmacyImage from '../../images/medicine1.jpg'; // Correctly import the image
+
 
 function CreateInvoice() {
     const { id } = useParams();
@@ -36,6 +39,7 @@ function CreateInvoice() {
         const selectedMed = medicines.find(med => med._id === selectedMedicine);
         const newMedicine = {
             medicineId: selectedMed._id,
+            name: selectedMed.name,
             quantity: quantity,
             price: selectedMed.price
         };
@@ -44,6 +48,8 @@ function CreateInvoice() {
             medicines: [...invoice.medicines, newMedicine],
             total: invoice.total + (selectedMed.price * quantity)
         });
+        setSelectedMedicine('');
+        setQuantity(0);
     };
 
     const handleSubmit = async (e) => {
@@ -62,58 +68,71 @@ function CreateInvoice() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h2>CREATE INVOICE</h2>
-            </div>
-            <br />
-            <label>
-                Customer Name:
-                <input
-                    type="text"
-                    name="customerName"
-                    value={invoice.customerName}
-                    placeholder="Enter customer name"
-                    onChange={handleChange}
-                    required
-                />
-            </label>
-            <label>
-                Customer Email:
-                <input
-                    type="email"
-                    name="customerEmail"
-                    value={invoice.customerEmail}
-                    placeholder="Enter email"
-                    onChange={handleChange}
-                    required
-                />
-            </label>
-            <label>
-                Medicines:
-                <select name="medicine" value={selectedMedicine} onChange={(e) => setSelectedMedicine(e.target.value)}>
-                    <option value="">Select a medicine</option>
-                    {medicines.map(med => (
-                        <option key={med._id} value={med._id}>{med.name}</option>
-                    ))}
-                </select>
-                <label>Quantity needed</label>
-                <input
-                    type="number"
-                    name="quantity"
-                    value={quantity}
-                    onChange={(e) => setQuantity(Number(e.target.value))}
-                />
-                <button type="button" onClick={handleAddMedicine}>Add Medicine</button>
-            </label>
-            <ul>
-                {invoice.medicines.map((med, index) => (
-                    <li key={index}>{med.medicineId.name} - {med.quantity} x {med.price}</li>
-                ))}
-            </ul>
-            <p>Total Amount: {invoice.total}</p>
-            <button type="submit">Create Invoice</button>
-        </form>
+        <div className="create-invoice-page">
+            <form onSubmit={handleSubmit} className="create-invoice-form">
+                <div className="form-content">
+                    <div className="form-left">
+                        <div>
+                            <h2>CREATE INVOICE</h2>
+                        </div>
+                        <br />
+                        <div className="form-group">
+                            <label>Customer Name:</label>
+                            <input
+                                type="text"
+                                name="customerName"
+                                value={invoice.customerName}
+                                placeholder="Enter customer name"
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Customer Email:</label>
+                            <input
+                                type="email"
+                                name="customerEmail"
+                                value={invoice.customerEmail}
+                                placeholder="Enter email"
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group medicine-quantity-group">
+                            <label>Medicines:</label>
+                            <select name="medicine" value={selectedMedicine} onChange={(e) => setSelectedMedicine(e.target.value)}>
+                                <option value="">Select a medicine</option>
+                                {medicines.map(med => (
+                                    <option key={med._id} value={med._id}>{med.name}</option>
+                                ))}
+                            </select>
+                            <label>Quantity needed</label>
+                            <input
+                                type="number"
+                                name="quantity"
+                                value={quantity}
+                                onChange={(e) => setQuantity(Number(e.target.value))}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <button type="button" onClick={handleAddMedicine} className="add-medicine-btn">Add Medicine</button>
+                        </div>
+                        <ul>
+                            {invoice.medicines.map((med, index) => (
+                                <li key={index}>{med.name} - {med.quantity} x {med.price}</li>
+                            ))}
+                        </ul>
+                        <p>Total Amount: {invoice.total}</p>
+                        <div className="form-group">
+                            <button type="submit" className="create-invoice-btn">Create Invoice</button>
+                        </div>
+                    </div>
+                    <div className="form-right">
+                        <img src={pharmacyImage} alt="Medicine" />
+                    </div>
+                </div>
+            </form>
+        </div>
     );
 }
 

@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import './editSupplier.css'; // Import the CSS file
 
 function EditSupplier() {
     const { id } = useParams();
 
-    const [supplierData, setsupplierData] = useState({
+    const [supplierData, setSupplierData] = useState({
         name: "",
         email: "",
         contractInfo: "",
+    });
+
+    const [editMode, setEditMode] = useState({
+        name: false,
+        email: false,
+        contractInfo: false,
     });
 
     useEffect(() => {
@@ -19,7 +25,7 @@ function EditSupplier() {
                 console.log(data);
 
                 if (data.success) {
-                    setsupplierData(data.data);
+                    setSupplierData(data.data);
                 } else {
                     console.error(data.message);
                 }
@@ -29,10 +35,10 @@ function EditSupplier() {
         };
 
         fetchSupplierData();
-    }, []);
+    }, [id]);
 
     const handleInputChange = (e) => {
-        setsupplierData({
+        setSupplierData({
             ...supplierData,
             [e.target.name]: e.target.value,
         });
@@ -56,6 +62,11 @@ function EditSupplier() {
             if (data.success) {
                 console.log('Supplier updated successfully');
                 alert("Supplier data updated successfully!");
+                setEditMode({
+                    name: false,
+                    email: false,
+                    contractInfo: false,
+                });
             } else {
                 console.error(data.message);
             }
@@ -65,52 +76,67 @@ function EditSupplier() {
         }
     };
 
-    return(
-        <div>
+    const toggleEditMode = (field) => {
+        setEditMode((prev) => ({
+            ...prev,
+            [field]: !prev[field],
+        }));
+    };
+
+    return (
+        <div className="edit-supplier-page">
             <div className="edit-supplier-form">
-                
-                    <div>
-                        <h2>SUPPLIER DETAILS</h2>
-                    </div>
-                    <br></br>
-
-                    <label>Supplier / Manufacturer  Name :</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter name"
-                        onChange={handleInputChange} 
-                        value={supplierData?.name}
-                    />
-                    
-                    <label>Email Address :</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter email"
-                        onChange={handleInputChange} 
-                        value={supplierData?.email}
-                    />
-
-                    <label>Contract Information :</label>
-                    <input
-                        type="text"
-                        id="contractInfo"
-                        name="contractInfo"
-                        placeholder="Enter contract information"
-                        onChange={handleInputChange} 
-                        value={supplierData?.contractInfo}
-                    />
-
-                    <button onClick={handleUpdate} className="edit-btn"> Edit Supplier</button>
-
-                
+                <h2>SUPPLIER DETAILS</h2>
+                <br />
+                <div className="form-group">
+                    <label>Supplier / Manufacturer Name:</label>
+                    {editMode.name ? (
+                        <input
+                            type="text"
+                            name="name"
+                            value={supplierData.name}
+                            onChange={handleInputChange}
+                            onBlur={() => toggleEditMode('name')}
+                            autoFocus
+                        />
+                    ) : (
+                        <p onClick={() => toggleEditMode('name')} className="editable-field">{supplierData.name}</p>
+                    )}
+                </div>
+                <div className="form-group">
+                    <label>Email Address:</label>
+                    {editMode.email ? (
+                        <input
+                            type="email"
+                            name="email"
+                            value={supplierData.email}
+                            onChange={handleInputChange}
+                            onBlur={() => toggleEditMode('email')}
+                            autoFocus
+                        />
+                    ) : (
+                        <p onClick={() => toggleEditMode('email')} className="editable-field">{supplierData.email}</p>
+                    )}
+                </div>
+                <div className="form-group">
+                    <label>Contract Information:</label>
+                    {editMode.contractInfo ? (
+                        <input
+                            type="text"
+                            name="contractInfo"
+                            value={supplierData.contractInfo}
+                            onChange={handleInputChange}
+                            onBlur={() => toggleEditMode('contractInfo')}
+                            autoFocus
+                        />
+                    ) : (
+                        <p onClick={() => toggleEditMode('contractInfo')} className="editable-field">{supplierData.contractInfo}</p>
+                    )}
+                </div>
+                <button onClick={handleUpdate} className="edit-btn">Update Supplier</button>
             </div>
         </div>
-    )
-
+    );
 }
 
 export default EditSupplier;

@@ -1,0 +1,85 @@
+.supplier-report-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+  }
+  
+  .download-button {
+    margin-left: -800px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #05a60b;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #e25927;
+  }
+  
+  .supplier-report-container {
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  
+  .supplier-report-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .supplier-report-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .supplier-report-container table, .supplier-report-container th, .supplier-report-container td {
+    border: 1px solid #ccc;
+  }
+  
+  .supplier-report-container th, .supplier-report-container td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .supplier-report-container th {
+    background-color: #605d5d;
+  }
+  
+  .report-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .report-date {
+    font-size: 16px;
+  }
+  
+  .report-signature {
+    font-size: 16px;
+  }
+  
+  /* Hide the download button in the PDF */
+  @media print {
+    .download-button {
+      display: none;
+    }
+  }
+  

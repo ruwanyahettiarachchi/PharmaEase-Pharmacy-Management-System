@@ -12,6 +12,8 @@ import PharmacyDashBoard from './components/DashBoardComponent/dashboard';
 import NavBar from './components/NavigationComponent/NavBar';
 import EditMedicine from './components/MedicineComponent/editMedicine';
 import EditSupplier from './components/SupplierComponent/editSupplier';
+import SupplierReport from './components/ReportsComponent/supplierReport';
+import MedicineReport from './components/ReportsComponent/medicineReport';
 
 function App() {
   return (
@@ -31,7 +33,8 @@ function App() {
         <Route path="/invoicelist" element={<InvoiceList/>}></Route>
         <Route path="/update_medicine/:id" element={<EditMedicine/>}></Route>
         <Route path="/update_supplier/:id" element={<EditSupplier/>}></Route>
-
+        <Route path="/supplierreport" element={<SupplierReport/>}></Route>
+        <Route path="/medicinereport" element={<MedicineReport/>}></Route>
 
         </Routes>
 

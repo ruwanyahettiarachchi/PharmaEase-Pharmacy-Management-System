@@ -3,6 +3,7 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './medicineReport.css'; // Import the CSS file
+import logo from '../../images/logo.png';
 
 function MedicineReport() {
   const [suppliers, setSuppliers] = useState([]);
@@ -59,11 +60,12 @@ function MedicineReport() {
       <button className="download-button" onClick={downloadPDF}>Download Report</button>
       <div id="medicine-report-container" className="medicine-report-container">
         <header className="report-header">
-          <img src="logo.png" alt="Pharma Ease Logo" className="company-logo" />
+          <img src={logo} alt="Pharma Ease Logo" className="company-logo" />
           <div className="company-details">
-            <h2>Pharma Ease</h2>
+            <h2>Pharma Ease</h2><br></br>
             <p>123 Health St., Wellness City, 12345</p>
-            <p>Phone: (123) 456-7890 | Fax: (123) 456-7891</p>
+            <p>Phone: (123) 456-7890</p>
+            <p>Fax: (123) 456-7891</p>
           </div>
         </header>
         <h1>Medicine Details Report</h1>

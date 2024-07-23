@@ -54,7 +54,7 @@ function NavBar() {
 
                 <div className='menu-item'>
                     <a href='#' onClick={() => toggleSection('reports')}>
-                        Download Reports {expandedSection === 'reports' ? <FaAngleUp /> : <FaAngleDown />}
+                        Reports {expandedSection === 'reports' ? <FaAngleUp /> : <FaAngleDown />}
                     </a>
                     {expandedSection === 'reports' && (
                         <div className='submenu'>

@@ -41,13 +41,13 @@ router.get("/supplier/:id", async (req, res) => {
             return res.status(404).send({ success: false, message: "supplier not found" });
         }
 
-        res.send({ success: true, message: "supplier fetched successfully", data: user });
+        res.send({ success: true, message: "supplier fetched successfully", data: supplier });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, message: "Internal Server Error" });
     }
-    
 });
+
 
 
 //get count in suppliers table

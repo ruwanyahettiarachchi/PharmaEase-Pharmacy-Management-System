@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import './editSupplier.css'; // Import the CSS file
 
 function EditSupplier() {
@@ -20,14 +21,11 @@ function EditSupplier() {
     useEffect(() => {
         const fetchSupplierData = async () => {
             try {
-                const response = await fetch(`http://localhost:8060/supplier/${id}`);
-                const data = await response.json();
-                console.log(data);
-
-                if (data.success) {
-                    setSupplierData(data.data);
+                const response = await axios.get(`http://localhost:8060/supplier/${id}`);
+                if (response.data.success) {
+                    setSupplierData(response.data.data);
                 } else {
-                    console.error(data.message);
+                    console.error(response.data.message);
                 }
             } catch (error) {
                 console.error('Error fetching supplier data:', error);
@@ -46,20 +44,12 @@ function EditSupplier() {
 
     const handleUpdate = async () => {
         try {
-            const response = await fetch(`http://localhost:8060/update_supplier/`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: supplierData._id,
-                    ...supplierData,
-                }),
+            const response = await axios.put(`http://localhost:8060/update_supplier`, {
+                id: supplierData._id,
+                ...supplierData,
             });
 
-            const data = await response.json();
-
-            if (data.success) {
+            if (response.data.success) {
                 console.log('Supplier updated successfully');
                 alert("Supplier data updated successfully!");
                 setEditMode({
@@ -68,7 +58,7 @@ function EditSupplier() {
                     contractInfo: false,
                 });
             } else {
-                console.error(data.message);
+                console.error(response.data.message);
             }
         } catch (error) {
             console.error('Error updating supplier:', error);

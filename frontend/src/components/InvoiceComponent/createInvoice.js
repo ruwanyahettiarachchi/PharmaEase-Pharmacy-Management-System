@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './createInvoice.css'; // Import the new CSS file
-import pharmacyImage from '../../images/medicine1.jpg'; // Correctly import the image
+import pharmacyImage from '../../images/invoice2.jpg'; // Correctly import the image
 
 
 function CreateInvoice() {

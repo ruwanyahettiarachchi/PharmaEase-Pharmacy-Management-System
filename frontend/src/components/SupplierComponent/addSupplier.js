@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './addSupplier.css'; // Import the CSS file
-import pharmacyImage from '../../images/medicine1.jpg'; // Correctly import the image
+import pharmacyImage from '../../images/supplier.jpg'; // Correctly import the image
 
 
 function AddSupplier() {

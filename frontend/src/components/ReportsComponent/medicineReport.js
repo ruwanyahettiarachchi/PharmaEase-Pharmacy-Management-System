@@ -58,6 +58,14 @@ function MedicineReport() {
     <div className="medicine-report-page">
       <button className="download-button" onClick={downloadPDF}>Download Report</button>
       <div id="medicine-report-container" className="medicine-report-container">
+        <header className="report-header">
+          <img src="logo.png" alt="Pharma Ease Logo" className="company-logo" />
+          <div className="company-details">
+            <h2>Pharma Ease</h2>
+            <p>123 Health St., Wellness City, 12345</p>
+            <p>Phone: (123) 456-7890 | Fax: (123) 456-7891</p>
+          </div>
+        </header>
         <h1>Medicine Details Report</h1>
         <table>
           <thead>

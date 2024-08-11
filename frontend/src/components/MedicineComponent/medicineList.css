@@ -67,10 +67,4 @@ table tr:hover {
     color: #f44336;
 }
 
-.action-btn:hover .edit-icon {
-    color: #388e3c;
-}
 
-.action-btn:hover .delete-icon {
-    color: #d32f2f;
-}

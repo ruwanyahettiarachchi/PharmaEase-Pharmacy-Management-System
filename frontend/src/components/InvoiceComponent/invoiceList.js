@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './invoiceList.css'; // Import the CSS file
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons
+import { FaTrashAlt } from 'react-icons/fa'; // Importing only the delete icon
 
 function InvoiceList() {
   const [invoiceList, setInvoiceList] = useState([]);
@@ -38,13 +38,14 @@ function InvoiceList() {
   return (
     <div className="invoice-list-page">
       <div className="invoice-list-container">
-        <table id="invoice table">
+      <h2>Created Invoices</h2>
+        <table id="invoice-table">
           <thead>
             <tr>
               <th>Customer Name</th>
-              <th>Email </th>
+              <th>Email</th>
               <th>Total Amount</th>
-              <th>Action</th>
+              <th>Delete</th> 
             </tr>
           </thead>
           <tbody>
@@ -54,9 +55,7 @@ function InvoiceList() {
                 <td>{invoice.customerEmail}</td>
                 <td>{invoice.total}</td>
                 <td>
-                  <a href={`/update_invoice/${invoice._id}`} className="action-btn">
-                    <FaEdit className="icon edit-icon" />
-                  </a>
+                  {/* Removed the Edit button */}
                   <button onClick={() => handleDelete(invoice._id)} className="action-btn">
                     <FaTrashAlt className="icon delete-icon" />
                   </button>

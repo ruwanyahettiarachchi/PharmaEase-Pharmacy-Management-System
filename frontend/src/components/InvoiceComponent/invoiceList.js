@@ -38,10 +38,11 @@ function InvoiceList() {
   return (
     <div className="invoice-list-page">
       <div className="invoice-list-container">
-        <table>
+        <table id="invoice table">
           <thead>
             <tr>
               <th>Customer Name</th>
+              <th>Email </th>
               <th>Total Amount</th>
               <th>Action</th>
             </tr>
@@ -50,6 +51,7 @@ function InvoiceList() {
             {invoiceList.map((invoice) => (
               <tr key={invoice._id}>
                 <td>{invoice.customerName}</td>
+                <td>{invoice.customerEmail}</td>
                 <td>{invoice.total}</td>
                 <td>
                   <a href={`/update_invoice/${invoice._id}`} className="action-btn">

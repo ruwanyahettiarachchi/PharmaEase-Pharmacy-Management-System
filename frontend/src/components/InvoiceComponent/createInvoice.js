@@ -1,55 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './createInvoice.css'; // Import the new CSS file
-import pharmacyImage from '../../images/invoice2.jpg'; // Correctly import the image
-
+import './createInvoice.css';
+import pharmacyImage from '../../images/invoice2.jpg';
 
 function CreateInvoice() {
     const { id } = useParams();
+    const [medicineList, setMedicineList] = useState([]);
     const navigate = useNavigate();
     const [invoice, setInvoice] = useState({ customerName: '', customerEmail: '', medicines: [], total: 0 });
-    const [medicines, setMedicines] = useState([]);
+
     const [selectedMedicine, setSelectedMedicine] = useState('');
     const [quantity, setQuantity] = useState(0);
 
-    useEffect(() => {
-        const fetchInvoice = async () => {
-            if (id) {
-                const result = await axios.get(`http://localhost:8060/invoices/${id}`);
-                setInvoice(result.data);
+    // Fetch medicines
+    const getFetchDetails = async () => {
+        try {
+            const data = await axios.get('http://localhost:8060/medicine');
+            if (data.data.success) {
+                setMedicineList(data.data.data);
             }
-        };
-
-        const fetchMedicines = async () => {
-            const result = await axios.get('http://localhost:8060/medicinelist');
-            setMedicines(result.data);
-        };
-
-        fetchInvoice();
-        fetchMedicines();
-    }, [id]);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInvoice({ ...invoice, [name]: value });
+        setInvoice((prev) => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
+    useEffect(() => {
+        getFetchDetails();
+    }, []);
+
     const handleAddMedicine = () => {
-        const selectedMed = medicines.find(med => med._id === selectedMedicine);
-        const newMedicine = {
-            medicineId: selectedMed._id,
-            name: selectedMed.name,
-            quantity: quantity,
-            price: selectedMed.price
-        };
-        setInvoice({
-            ...invoice,
-            medicines: [...invoice.medicines, newMedicine],
-            total: invoice.total + (selectedMed.price * quantity)
-        });
-        setSelectedMedicine('');
-        setQuantity(0);
+        const selectedMed = medicineList.find(med => med._id === selectedMedicine);
+        if (selectedMed && quantity > 0) {
+            const newMedicine = {
+                medicineId: selectedMed._id,
+                name: selectedMed.m_name,
+                quantity: quantity,
+                price: selectedMed.price
+            };
+            setInvoice({
+                ...invoice,
+                medicines: [...invoice.medicines, newMedicine],
+                total: invoice.total + (selectedMed.price * quantity)
+            });
+            setSelectedMedicine('');
+            setQuantity(0);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -60,10 +64,11 @@ function CreateInvoice() {
             } else {
                 await axios.post('http://localhost:8060/create_invoice', invoice);
             }
-            navigate('/invoices');
-        } catch (error) {
-            console.error("Error adding data:", error);
-            alert("An error occurred while adding data");
+            alert("Invoice created successfully!");
+            navigate('/invoicelist');
+        } catch (err) {
+            console.error("Error adding data:", err);
+            alert("An error occurred while creating the invoice");
         }
     };
 
@@ -80,6 +85,7 @@ function CreateInvoice() {
                             <label>Customer Name:</label>
                             <input
                                 type="text"
+                                id='customerName'
                                 name="customerName"
                                 value={invoice.customerName}
                                 placeholder="Enter customer name"
@@ -91,6 +97,7 @@ function CreateInvoice() {
                             <label>Customer Email:</label>
                             <input
                                 type="email"
+                                id='customerEmail'
                                 name="customerEmail"
                                 value={invoice.customerEmail}
                                 placeholder="Enter email"
@@ -100,18 +107,24 @@ function CreateInvoice() {
                         </div>
                         <div className="form-group medicine-quantity-group">
                             <label>Medicines:</label>
-                            <select name="medicine" value={selectedMedicine} onChange={(e) => setSelectedMedicine(e.target.value)}>
-                                <option value="">Select a medicine</option>
-                                {medicines.map(med => (
-                                    <option key={med._id} value={med._id}>{med.name}</option>
+                            <select
+                                value={selectedMedicine}
+                                onChange={(e) => setSelectedMedicine(e.target.value)}
+                            >
+                                <option value="">Select Medicine</option>
+                                {medicineList.map((medicine) => (
+                                    <option key={medicine._id} value={medicine._id}>
+                                        {medicine.m_name}
+                                    </option>
                                 ))}
                             </select>
-                            <label>Quantity needed</label>
+                            <label>Quantity needed:</label>
                             <input
                                 type="number"
                                 name="quantity"
                                 value={quantity}
                                 onChange={(e) => setQuantity(Number(e.target.value))}
+                                min="0"
                             />
                         </div>
                         <div className="form-group">
@@ -119,7 +132,7 @@ function CreateInvoice() {
                         </div>
                         <ul>
                             {invoice.medicines.map((med, index) => (
-                                <li key={index}>{med.name} - {med.quantity} x {med.price}</li>
+                                <li key={index}>{med.name} - {med.quantity} x {med.price} = {med.quantity * med.price}</li>
                             ))}
                         </ul>
                         <p>Total Amount: {invoice.total}</p>

@@ -12,7 +12,7 @@ const invoiceSchema = mongoose.Schema({
         quantity: Number,
         price: Number,
       }],
-    total:Number,
+      total:Number,
 
 })
 

@@ -55,7 +55,7 @@ function InvoiceList() {
                 <td>{invoice.customerEmail}</td>
                 <td>{invoice.total}</td>
                 <td>
-                  {/* Removed the Edit button */}
+                  
                   <button onClick={() => handleDelete(invoice._id)} className="action-btn">
                     <FaTrashAlt className="icon delete-icon" />
                   </button>

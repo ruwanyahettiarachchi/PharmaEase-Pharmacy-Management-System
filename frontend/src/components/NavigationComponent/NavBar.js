@@ -60,7 +60,7 @@ function NavBar() {
                         <div className='submenu'>
                             <a href='/medicinereport'>Medicine Report</a>
                             <a href='/supplierreport'>Supplier Report</a>
-                            <a href='/salesreport'>Sales Report</a>
+                            <a href='/invoicereport'>Sales Report</a>
                         </div>
                     )}
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {useNavigate } from 'react-router-dom';
 import './addMedicine.css';
 import pharmacyImage from '../../images/medicine1.jpg'; // Correctly import the image
 
@@ -13,6 +14,7 @@ const AddMedicine = () => {
   });
 
   const [suppliers, setSuppliers] = useState([]);
+  const navigate = useNavigate();
 
   // Fetch suppliers
   const getFetchData = async () => {
@@ -44,6 +46,7 @@ const AddMedicine = () => {
       const data = await axios.post("http://localhost:8060/create_medicine", medicine);
       console.log(data);
       alert("Medicine added successfully!");
+      navigate('/medicinelist');
     } catch (err) {
       alert(err);
     }

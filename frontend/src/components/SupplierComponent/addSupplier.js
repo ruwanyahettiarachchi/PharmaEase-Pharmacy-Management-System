@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './addSupplier.css'; // Import the CSS file
-import pharmacyImage from '../../images/supplier.jpg'; // Correctly import the image
+import {useNavigate } from 'react-router-dom';
+import './addSupplier.css'; 
+import pharmacyImage from '../../images/supplier.jpg'; 
 
 
 function AddSupplier() {
@@ -19,6 +20,8 @@ function AddSupplier() {
     }));
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,6 +29,7 @@ function AddSupplier() {
       const response = await axios.post("http://localhost:8060/create_supplier", formdata);
       console.log(response.data);
       alert("Data added successfully!");
+      navigate('/supplierlist');
     } catch (error) {
       console.error("Error adding data:", error);
       alert("An error occurred while adding data");

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './navbar.css';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-
+import logo from '../../images/logo.png';
 function NavBar() {
     const [expandedSection, setExpandedSection] = useState(null);
 
@@ -12,6 +12,7 @@ function NavBar() {
     return (
         <div>
             <div className='navbar'>
+                <img src={logo} alt='Logo' className='logo' />
                 <h3 className='topic'>Pharma Ease</h3>
 
                 <a href='/' onClick={() => setExpandedSection(null)}>Dash Board</a>

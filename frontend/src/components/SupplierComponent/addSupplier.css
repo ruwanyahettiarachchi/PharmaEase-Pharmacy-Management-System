@@ -51,6 +51,8 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    width: 200px;
+    align-items: center;
 }
 
 .submit-btn:hover {
@@ -65,7 +67,8 @@
 }
 
 .image-container img {
-    max-width: 100%;
+    max-width: 90%;
+    margin-top: 40px;
     height: auto;
     border: 2px solid #ccc;
     border-radius: 8px;

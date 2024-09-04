@@ -6,6 +6,7 @@
     min-height: 100vh;
     background: url('../../images/pharmacy1.jpg') no-repeat center center fixed;
     background-size: cover;
+    
 }
 
 .dashboard-container {
@@ -22,7 +23,7 @@
 
 .summary-box {
     flex: 1;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
     padding: 20px;
     margin: 0 10px;
     text-align: center;
@@ -52,7 +53,7 @@
 
 .list-section {
     flex: 1;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
     padding: 20px;
     margin: 0 10px;
     border-radius: 8px;

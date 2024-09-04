@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './createInvoice.css';
-import pharmacyImage from '../../images/invoice2.jpg';
+
 
 function CreateInvoice() {
     const { id } = useParams();
@@ -140,9 +140,7 @@ function CreateInvoice() {
                             <button type="submit" className="create-invoice-btn">Create Invoice</button>
                         </div>
                     </div>
-                    <div className="form-right">
-                        <img src={pharmacyImage} alt="Medicine" />
-                    </div>
+                    
                 </div>
             </form>
         </div>

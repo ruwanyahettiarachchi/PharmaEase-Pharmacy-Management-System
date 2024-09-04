@@ -57,7 +57,7 @@ function SupplierReport() {
             <tr>
               <th>Supplier Name</th>
               <th>Email</th>
-              <th>Contract Information</th>
+              <th>Contact Information</th>
             </tr>
           </thead>
           <tbody>

@@ -109,7 +109,7 @@ function EditSupplier() {
                     )}
                 </div>
                 <div className="form-group">
-                    <label>Contract Information:</label>
+                    <label>Contact Information:</label>
                     {editMode.contractInfo ? (
                         <input
                             type="text"

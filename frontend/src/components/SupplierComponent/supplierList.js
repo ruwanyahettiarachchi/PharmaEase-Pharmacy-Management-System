@@ -45,7 +45,7 @@ function SupplierList() {
             <tr>
               <th>Supplier Name</th>
               <th>Email</th>
-              <th>Contract Information</th>
+              <th>Contact Information</th>
               <th>Action</th>
             </tr>
           </thead>

@@ -62,12 +62,12 @@ function AddSupplier() {
               required
             />
 
-            <label>Contract Information:</label>
+            <label>Contact Information:</label>
             <input
               type="text"
               id="contractInfo"
               name="contractInfo"
-              placeholder="Enter contract information"
+              placeholder="Enter contact information"
               onChange={handleOnChange}
               required
             />

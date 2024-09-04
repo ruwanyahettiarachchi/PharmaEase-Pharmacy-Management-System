@@ -40,12 +40,16 @@
 }
 
 .medicine-form input,
-.medicine-form select {
+.medicine-form select,
+.medicine-form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-family: inherit; /* Use the same font as the page */
+    font-size: 14px; /* Ensure font size matches other inputs */
+    line-height: 1.5;
 }
 
 .medicine-form .submit-btn {

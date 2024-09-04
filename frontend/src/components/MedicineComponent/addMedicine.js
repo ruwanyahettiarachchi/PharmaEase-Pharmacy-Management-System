@@ -70,12 +70,13 @@ const AddMedicine = () => {
             />
 
             <label>Description:</label>
-            <input
-              type="text"
+            <textarea
               id="description"
               name="description"
               placeholder="Enter description"
               onChange={handleOnChange}
+              rows="4"
+              cols="70"
             />
 
             <label>Medicine Price:</label>
@@ -85,6 +86,7 @@ const AddMedicine = () => {
               name="price"
               placeholder="Enter unit price"
               onChange={handleOnChange}
+              step="0.01"
               required
             />
 
